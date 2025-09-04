@@ -1,0 +1,270 @@
+\documentclass[12pt]{article}
+\textwidth 15.4 cm
+\textheight 21.5 cm
+\topmargin 0.5cm
+\evensidemargin 2 cm
+\oddsidemargin 3 mm
+
+\newcommand{\qed}{\rule[-0.2ex]{0.3em}{1.4ex}}
+\newcommand{\out}[1]{\mbox{\bf {\sf Out}}({#1})}
+\newenvironment{Proof}%
+{\par\vspace{0.5ex}\noindent{\bf Proof:}\hspace{0.5em}}%
+{\nopagebreak
+\strut\nopagebreak
+\hspace{\fill}\qed\par\medskip\noindent}
+\newenvironment{proof}% lowercase version...
+{\par\vspace{0.5ex}\noindent{\bf Proof:}\hspace{0.5em}}%
+{\nopagebreak
+\strut\nopagebreak
+\hspace{\fill}\qed\par\medskip\noindent}
+\newenvironment{proofattempt}%
+{\par\vspace{0.5ex}\noindent{\bf Proof Attempt:}\hspace{0.5em}}%
+{\nopagebreak
+\strut\nopagebreak
+\hspace{\fill}\qed\par\medskip\noindent}
+\newtheorem{theorem}{Theorem}
+\newtheorem{claim}{Claim}
+\newtheorem{prop}{Proposition}
+\newtheorem{property}{Property}
+\newtheorem{lemma}{Lemma}
+\newtheorem{fact}{Fact}
+\newtheorem{definition}{Definition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{observation}{Observation}
+\newtheorem{conjecture}{Conjecture}
+
+\newcommand{\support}{\mbox{\sf supp}}
+\newcommand{\OMS}{\mbox{$\bf \Omega_{S}$}}
+
+%\definecolor{ao(english)}{rgb}{0.0, 0.5, 0.0}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{color}
+\usepackage{circuitikz}
+\usepackage{listings}
+\usepackage{circuitikz}
+%\usepackage{tikz}
+
+
+\usepackage{textcomp}
+
+
+\usepackage{listings}
+\lstset{escapeinside={<@}{@>}}
+\usepackage{color}
+
+\definecolor{darkgreen}{rgb}{0.31,0.45,0.25}
+
+\usepackage{textcomp}
+
+
+\usepackage[T1]{fontenc}
+\usepackage{inconsolata}
+
+\usepackage{color}
+
+\definecolor{pblue}{rgb}{0.13,0.13,1}
+\definecolor{pgreen}{rgb}{0,0.5,0}
+\definecolor{pred}{rgb}{0.9,0,0}
+\definecolor{pgrey}{rgb}{0.46,0.45,0.48}
+
+
+\lstset{language=Java,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  breakatwhitespace=true,
+  commentstyle=\color{pgreen},
+  keywordstyle=\color{pblue},
+  stringstyle=\color{pred},
+  basicstyle=\ttfamily,
+  moredelim=[il][\textcolor{pgrey}]{$$},
+  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%}
+}
+
+
+
+\lstset{
+	language=Java
+}
+
+
+
+
+\usepackage{textcomp}
+\usepackage{booktabs}
+
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\cov}{\sf cov}
+ 
+\newcommand{\IR}{{\rm\hbox{I\kern-.15em R}}}
+\newcommand{\reals}{{\rm\hbox{I\kern-.15em R}}}
+\newcommand{\IN}{{\rm\hbox{I\kern-.15em N}}}
+\newcommand{\IZ}{{\sf\hbox{Z\kern-.40em Z}}}
+\newcommand{\id}{\mbox{\bf \em id}}
+\newcommand{\lo}{\mbox{\bf \em loc}}
+\newcommand{\E}{\mbox{\sf {I\kern-.15em E}}}
+\newcommand{\F}{\mbox{\bf F}}
+\newcommand{\Var}{\mbox{\bf Var}}
+\newcommand{\Prob}{\mbox{\sf \hbox{I\kern-.15em P}}}
+\newcommand{\g}{\mbox{\bf \em g}}
+\newcommand{\SeqRank}{\mbox{\bf \em SequentialRank}}
+
+\newcommand{\vat}{\mbox{\scshape \tiny VAT}}
+\newcommand{\emm}{\mbox{\scshape \tiny EM}}
+\newcommand{\ram}{\mbox{\scshape \tiny RAM}}
+\newcommand{\mNC}{\ensuremath{\mbox{m}{\cal NC}^{1}}}
+
+\newcommand{\ta}{\mbox{\color{blue} T}}
+\newcommand{\h}{\mbox{\color{red} H}}
+
+%
+%
+%
+%\lstset{language=Scheme} 
+%
+%
+%
+
+
+\begin{document}
+\title{{\bf The Java Singleton Pattern\\DRAFT}}
+\author{
+Phillip G. Bradford\thanks{phillip.bradford@uconn.edu, phillip.g.bradford@gmail.com,
+{\sc University of Connecticut, Department of Computer Science and Engineering, Storrs, CT USA}}
+}
+
+\date{\small\today}
+
+\maketitle
+
+%
+%
+%
+\begin{abstract}
+The Java singleton pattern is to ensure a JVM contains only one instance of an object.
+The version here is a common implementation that depends on a static field and a static method.
+ % .
+\end{abstract}
+
+%
+%
+%
+%
+\section{Java Singleton}
+\label{Java Singleton}
+%
+%
+%
+
+The next code is in \lstinline|https://github.com/wonder-phil/a2021_04_09_singleton|
+
+
+\begin{lstlisting}[label=JavaSingleton,frame=lines,caption=Basic Singleton]
+public class Singleton {
+	
+	private Singleton() { value++; }
+	
+	private static Singleton CLASS_INSTANCE = new Singleton();
+	protected int value = 0;
+	public static Singleton getInstance() {
+		return CLASS_INSTANCE;
+	}
+}
+\end{lstlisting}
+
+Listing~\ref{JavaSingleton} shows a classical implementation of a Java singleton depending on Java's static functionality.
+Particularly, the \lstinline|private| access modifier for the constructor prevents this class from being instantiated by any other
+class.
+The \lstinline|private static| modifier for the CLASS\_INSTANCE field ensures the one CLASS\_INSTANCE here is associated with the class
+rather than any object instance.
+
+\begin{lstlisting}[label=JavaNONSingleton,frame=lines,caption=Basic Non-Singleton]
+public class NonSingleton {
+	
+	public NonSingleton() { }
+	private int value = 0;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[label=JavaTESTSingleton,frame=lines,caption=Basic Singleton and Non-Singleton Test]
+public class TestSingleton {
+	
+	public static void main(String[] args) {
+		
+		Singleton so_1 = Singleton.getInstance();
+		Singleton so_2 = Singleton.getInstance();
+
+		System.out.print("SingletonObject: ");
+		if (so_1 == so_2) {
+			System.out.println("Same object instances");
+		} else {
+			System.out.println("Different object instances");
+		}
+		
+		NonSingleton ns_1 = new NonSingleton();
+		NonSingleton ns_2 = new NonSingleton();
+		
+		System.out.print("Nonsingleton: ");
+		if (ns_1 == ns_2) {
+			System.out.println("Same object instances");
+		} else {
+			System.out.println("Different object instances");
+		}
+	}
+}
+\end{lstlisting}
+
+%
+%
+\pagebreak
+%
+%
+
+%
+%
+\section{Exercises}
+
+%
+%
+%
+
+
+\begin{enumerate}
+
+\item
+What is the difference between a class-variable and an instance-variable?
+
+\item
+Try inheriting from the instance of the \lstinline|Singleton| class.
+Is this possible?
+How might the instance variable \lstinline|value| play a role?
+
+
+
+\end{enumerate}
+
+%
+
+%
+%
+%
+\pagebreak
+%
+%
+
+%
+\begin {thebibliography}{99}
+%
+ 
+ \bibitem{JavaOracle} Java The Complete Reference, Ninth Edition (Java 8),
+	Herbert Schildt, Oracle Press/McGraw-Hill, 2014.
+
+
+\end {thebibliography}
+\end{document}
