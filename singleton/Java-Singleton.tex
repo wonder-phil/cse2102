@@ -168,10 +168,10 @@ The next code is in \lstinline|https://github.com/wonder-phil/a2021_04_09_single
 \begin{lstlisting}[label=JavaSingleton,frame=lines,caption=Basic Singleton]
 public class Singleton {
 	
-	private Singleton() { value++; }
+	private Singleton() { }
 	
 	private static Singleton CLASS_INSTANCE = new Singleton();
-	protected int value = 0;
+
 	public static Singleton getInstance() {
 		return CLASS_INSTANCE;
 	}
@@ -243,7 +243,9 @@ What is the difference between a class-variable and an instance-variable?
 \item
 Try inheriting from the instance of the \lstinline|Singleton| class.
 Is this possible?
-How might the instance variable \lstinline|value| play a role?
+
+\item 
+How might the instance variable \lstinline|value| be useful?
 
 
 
