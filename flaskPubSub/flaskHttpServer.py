@@ -18,14 +18,14 @@ def root():
 def listSubscribers():
   return jsonify(subscribers)
 
-# Windows> curl.exe -X POST -H "Content-Type: application/json" -d "{\"name\":\"Alice\",\"URI\":\"http://good.site.com\"}" http://localhost:5000/submit
+# Windows> curl.exe -X POST -H "Content-Type: application/json" -d "{\"name\":\"Alice\",\"URI\":\"http://good.site.com\"}" http://localhost:5000/add-subscriber
 
 @app.route('/add-subscriber', methods=['POST'])
 def addSubscriber():
   data = request.json
   name = data.get('name')
   URI = data.get('URI')
-  subscribers[data] = URI
+  subscribers[name] = URI
   print(f"You entered: Name={name}, Address={URI}")
   return jsonify({'message': f'You sent name: {name} and address: {URI}'})
 
