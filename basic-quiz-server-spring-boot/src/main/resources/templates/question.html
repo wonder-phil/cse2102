@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head> 
+    <title>Question screen</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Result</h1>
+    <p th:text="'count: ' + ${count.count}" />
+    <div th:object="${myString}">
+        <p>Number: <span th:text="*{myString}"></span></p>
+    </div>
+    <a href="/get_question">Submit another message</a>
+</body>
+</html>
