@@ -5,11 +5,18 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Result</h1>
-    <p th:text="'count: ' + ${count.count}" />
-    <div th:object="${myString}">
-        <p>Number: <span th:text="*{myString}"></span></p>
-    </div>
+	<h1>Quiz question</h1>
+    <form action="/get_question" method="post">
+        <div th:object="${myString}">
+            <span>Question</span><span th:text="${count.count}">:</span> <span th:text="*{myString}"></span>
+        </div>
+        <input type="radio" id="trueOption" name="answer" value="true">
+        <label for="trueOption">True</label><br>
+        <input type="radio" id="falseOption" name="answer" value="false">
+        <label for="falseOption">False</label><br><br>
+        <input type="submit" value="Submit">
+    </form>
+
     <a href="/get_question">Submit another message</a>
 </body>
 </html>

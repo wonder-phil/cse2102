@@ -1,6 +1,5 @@
 package com.example.demo;
 
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +13,7 @@ public class WebController {
   }
 
   @PostMapping("/hello")
-  public String hello(@RequestParam(defaultValue = "Friend") String name, Model model) {
+  public String hello(@RequestParam(defaultValue = "My Good Friend") String name, Model model) {
     model.addAttribute("name", name);
     return "greet"; // renders templates/greet.html
   }

@@ -31,6 +31,12 @@ public class HomeController {
 			
 			return "greeting";
 	}
+	@PostMapping("/greeting")
+	public String greetingSubmit(@ModelAttribute Greeting greeting, @ModelAttribute Count count, Model model) {
+		model.addAttribute("greeting", greeting);
+		model.addAttribute("count", count);
+		return "result";
+  	}
 
 	@GetMapping("/get_question")
 	public String questionForm(Model model) {
@@ -43,13 +49,22 @@ public class HomeController {
 		model.addAttribute("count", count);
 		
 		return "question";
-}
+	}
 
-	  @PostMapping("/greeting")
- 		 public String greetingSubmit(@ModelAttribute Greeting greeting, @ModelAttribute Count count, Model model) {
-    		model.addAttribute("greeting", greeting);
-			model.addAttribute("count", count);
-    	return "result";
-  	}
+	@PostMapping("/get_question")
+	public String questionForm(String answer, Model model) {
+		System.out.println("The answer is " + answer);
+		model.getQuestion(1);
+		if (answer == model.getQuestions().getAnswer()) {
+			System.out.println("Correct!");
+		} else {
+			System.out.println("Wrong!");
+		}
+		//model.addAttribute("myString", myString );
+		
+		
+		return "question";
+	}
+
   
 }
