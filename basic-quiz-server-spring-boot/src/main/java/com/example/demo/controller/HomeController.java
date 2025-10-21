@@ -58,20 +58,20 @@ public class HomeController {
 	public String questionFormPOST(String answer, Model model) {
 		System.out.println("The answer is " + answer);
 		
-			GetQuestion getQuestion = new GetQuestion();
-			QuestionTrueFalse qtf = getQuestion.nextQuestion();
-			model.addAttribute("QuestionTrueFalse", qtf);
+		GetQuestion getQuestion = new GetQuestion();
+		QuestionTrueFalse qtf = getQuestion.nextQuestion();
+		model.addAttribute("QuestionTrueFalse", qtf);
 
-			Count count = new Count();
-			Count.count = Count.count + 1;
-			model.addAttribute("count", count);
-			MyString myString = new MyString();
-			myString.setMyString(getQuestion.nextQuestion().getQuestion());
-			model.addAttribute("myString", myString );
+		Count count = new Count();
+		Count.count = Count.count + 1;
+		model.addAttribute("count", count);
+		MyString myString = new MyString();
+		myString.setMyString(getQuestion.nextQuestion().getQuestion());
+		model.addAttribute("myString", myString );
 
-			// Compare Boolean values correctly (avoid reference equality)
-			Boolean answerBool = Boolean.valueOf(answer);
-			if (answerBool.equals(qtf.getAnswer())) {
+		// Compare Boolean values correctly (avoid reference equality)
+		Boolean answerBool = Boolean.valueOf(answer);
+		if (answerBool.equals(qtf.getAnswer())) {
 			System.out.println("Correct!");
 		} else {
 			System.out.println("Wrong!");
