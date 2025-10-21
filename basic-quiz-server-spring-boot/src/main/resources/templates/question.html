@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Quiz question</h1>
+	<h1 id="my-element">Quiz question</h1>
     <form action="/get_question" method="post">
         <div th:object="${myString}">
             <span>Question</span><span th:text="${count.count}">:</span> <span th:text="*{myString}"></span>

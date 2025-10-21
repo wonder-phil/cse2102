@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.example.demo.model.*;
 import com.example.demo.model.questions.*;
 
 public class GetQuestion {
@@ -7,8 +8,8 @@ public class GetQuestion {
 
     public GetQuestion() { }
 
-    public String nextQuestion() {
-        return arrayListQuestionsTF.nextQuestion(Count.count).getQuestion();
+    public com.example.demo.model.questions.QuestionTrueFalse nextQuestion() {
+        return arrayListQuestionsTF.nextQuestion(Count.count);
     }
 
 }
