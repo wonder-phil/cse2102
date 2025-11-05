@@ -8,8 +8,8 @@ public class GetQuestion {
 
     public GetQuestion() { }
 
-    public com.example.demo.model.questions.QuestionTrueFalse nextQuestion() {
-        return arrayListQuestionsTF.nextQuestion(Count.count);
+    public com.example.demo.model.questions.QuestionTrueFalse nextQuestion(int count) {
+        return arrayListQuestionsTF.nextQuestion(count);
     }
 
 }
