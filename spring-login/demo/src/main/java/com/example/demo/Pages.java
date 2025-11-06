@@ -12,18 +12,20 @@ import com.example.demo.model.Count;
 
 import jakarta.servlet.http.HttpSession;
 
-//@SessionAttributes("count")
+@SessionAttributes("count")
 
 @Controller
 public class Pages {
+
   @GetMapping("/")       public String landing() { return "index"; }
   @GetMapping("/home")   
   public String home(HttpSession session, Model model)    { 
-    		Count count = (Count) session.getAttribute("count");
+    Count count = (Count) session.getAttribute("count");
 		if (null == count) {
 			count = new Count();
 		}
 		count.inc();
+    session.setAttribute("count", count);
 		System.out.println("Count is " + count.getCount());	
 		model.addAttribute("count", count); // for the view
     
@@ -34,17 +36,19 @@ public class Pages {
   @GetMapping("/admin/p")public String adminOnly(){ return "admin"; }
   @GetMapping("/login")  public String login()   { return "login"; }
 
-    @PostMapping("/home")   
-    public String homePost(HttpSession session, Model model)    
-    { 
-      Count count = (Count) session.getAttribute("count");
-      if (null == count) {
-        count = new Count();
-      }
-      count.inc();
-      System.out.println("Count is " + count.getCount());	
-      model.addAttribute("count", count); // for the view
-      return "home"; 
+  @PostMapping("/home")   
+  public String homePost(HttpSession session, Model model)    
+  { 
+    Count count = (Count) session.getAttribute("count");
+    if (null == count) {
+      count = new Count();
     }
+    count.inc();
+    session.setAttribute("count", count);
+    System.out.println("Count is " + count.getCount());	
+    model.addAttribute("count", count); // for the view
+    
+    return "home"; 
+  }
 
 }
